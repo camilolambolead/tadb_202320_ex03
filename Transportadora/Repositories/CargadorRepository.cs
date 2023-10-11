@@ -1,18 +1,28 @@
-﻿namespace Transportadora.Repositories
-{
-    using Microsoft.EntityFrameworkCore;
-    using Transportadora.Data;
-    using Transportadora.Models;
-    using System.Collections.Generic;
-    using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using Transportadora.Data;
+using Transportadora.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Transportadora.Interfaces;
 
-    public class CargadorRepository
+namespace Transportadora.Repositories
+{
+    public class CargadorRepository : ICargadorRepository
     {
         private readonly TransporteContext _context;
 
         public CargadorRepository(TransporteContext context)
         {
             _context = context;
+        }
+
+        public bool IsCargadorInUseDuringPeakHours(Cargador cargador)
+        {
+            // Implementa la lógica de IsCargadorInUseDuringPeakHours aquí
+            // ...
+
+            return false; // Agrega la lógica apropiada
         }
 
         // Métodos CRUD para la entidad Cargador
@@ -26,16 +36,19 @@
         {
             return _context.Cargadores.FirstOrDefault(c => c.Id == cargadorId);
         }
+
         public void CreateCargador(Cargador cargador)
         {
             _context.Cargadores.Add(cargador);
             _context.SaveChanges();
         }
+
         public void UpdateCargador(Cargador cargador)
         {
             _context.Cargadores.Update(cargador);
             _context.SaveChanges();
         }
+
         public void DeleteCargador(int cargadorId)
         {
             var cargador = _context.Cargadores.FirstOrDefault(c => c.Id == cargadorId);
@@ -45,8 +58,5 @@
                 _context.SaveChanges();
             }
         }
-
-
     }
-
 }

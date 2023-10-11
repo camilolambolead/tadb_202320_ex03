@@ -10,5 +10,6 @@
 
         // Agregar una propiedad de navegación para Autobuses
         public List<Autobus> Autobuses { get; set; }
+        public int CiclosDeCarga { get; set; } // Número de ciclos de carga realizados por el cargador
     }
 }

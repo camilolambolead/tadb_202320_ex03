@@ -9,7 +9,7 @@ namespace Transportadora.Data
         public DbSet<Cargador> Cargadores { get; set; }
         public DbSet<Autobus> Autobuses { get; set; }
         public DbSet<Horario> Horarios { get; set; }
-
+        public DbSet<UsoAutobus> UsosAutobus { get; set; }
         public TransporteContext(DbContextOptions<TransporteContext> options)
             : base(options)
         {
@@ -17,6 +17,12 @@ namespace Transportadora.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Cargador>()
+            .HasMany(c => c.Autobuses)
+             .WithOne(a => a.Cargador)
+                .HasForeignKey(a => a.CargadorId);
+
             // Configuración de restricciones y relaciones
             modelBuilder.Entity<Cargador>()
                 .Property(c => c.HoraInicio)
@@ -67,7 +73,7 @@ namespace Transportadora.Data
                 .Property(h => h.CargadoresEnUso)
                 .IsRequired();
 
-            // Configuración de índices si es necesario
+           
             modelBuilder.Entity<Cargador>()
                 .HasIndex(c => c.Id)
                 .IsUnique();
@@ -79,6 +85,11 @@ namespace Transportadora.Data
             modelBuilder.Entity<Horario>()
                 .HasIndex(h => h.Id)
                 .IsUnique();
+
+            modelBuilder.Entity<UsoAutobus>()
+             .HasOne(uso => uso.Autobus)  // Uso la propiedad "Autobus" de la clase UsoAutobus
+             .WithMany(autobus => autobus.Usos)  
+             .HasForeignKey(uso => uso.AutobusId);
 
             base.OnModelCreating(modelBuilder);
         }
