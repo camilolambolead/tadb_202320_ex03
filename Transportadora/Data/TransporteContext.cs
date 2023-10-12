@@ -6,6 +6,9 @@ namespace Transportadora.Data
 {
     public class TransporteContext : DbContext
     {
+        public TransporteContext()
+        {
+        }
         public DbSet<Cargador> Cargadores { get; set; }
         public DbSet<Autobus> Autobuses { get; set; }
         public DbSet<Horario> Horarios { get; set; }
@@ -93,6 +96,17 @@ namespace Transportadora.Data
 
             base.OnModelCreating(modelBuilder);
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                // Reemplaza "YourConnectionString" con la cadena de conexión de tu base de datos PostgreSQL
+                string connectionString = "Host=parcial1.carwzg1ifhtm.us-east-1.rds.amazonaws.com;Database=Transportadora;Username=camilojaramillo;Password=1238938402";
+                optionsBuilder.UseNpgsql(connectionString);
+            }
+            base.OnConfiguring(optionsBuilder);
+        }
+
     }
 
 }

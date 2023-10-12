@@ -93,7 +93,7 @@ namespace Transportadora.Repositories
         public void UpdateAutobusUsage(Autobus autobus, DateTime usageTime)
         {
             // Obtenemos el autobús por su ID
-            var autobusId = GetAutobusById(autobus.);
+            var autobusId = GetAutobusById(autobus.Id);
             if (autobusId == null)
             {
                 // El autobús no existe

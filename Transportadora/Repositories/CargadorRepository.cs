@@ -19,10 +19,22 @@ namespace Transportadora.Repositories
 
         public bool IsCargadorInUseDuringPeakHours(Cargador cargador)
         {
-            // Implementa la lógica de IsCargadorInUseDuringPeakHours aquí
-            // ...
+            DateTime horaActual = DateTime.Now;
 
-            return false; // Agrega la lógica apropiada
+            // Verifica si la hora actual está dentro del horario pico
+            bool esHorarioPico = (horaActual.Hour >= 5 && horaActual.Hour < 9) || (horaActual.Hour >= 16 && horaActual.Hour < 20);
+
+            if (esHorarioPico)
+            {
+                // Verifica si el cargador está en uso durante el horario pico
+                if (cargador.EnUso)
+                {
+                    return true; // El cargador está en uso durante el horario pico
+                }
+            }
+
+            // Si no es horario pico o el cargador no está en uso, retorna false
+            return false;
         }
 
         // Métodos CRUD para la entidad Cargador

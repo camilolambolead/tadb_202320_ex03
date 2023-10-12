@@ -21,11 +21,12 @@ namespace Transportadora
 
         public IConfiguration Configuration { get; }
 
- 
-        public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+
+        public void ConfigureServices(IServiceCollection services)
         {
-        var connectionString = configuration.GetConnectionString("TransporteContext");
-        services.AddDbContext<TransporteContext>(options => options.UseNpgsql(connectionString));
+            var connectionString = Configuration.GetConnectionString("TransporteContext");
+            services.AddDbContext<TransporteContext>(options =>
+                options.UseNpgsql(connectionString));
 
             // Agregar servicios necesarios
             services.AddScoped<ICargadorRepository, CargadorRepository>();
@@ -35,6 +36,7 @@ namespace Transportadora
 
             services.AddControllers();
         }
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
