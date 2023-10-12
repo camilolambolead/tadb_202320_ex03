@@ -15,18 +15,40 @@ namespace Transportadora.Services
             _cargadorRepository = cargadorRepository;
         }
 
+        public void CreateCargador(Cargador cargador)
+        {
+            _cargadorRepository.CreateCargador(cargador);
+        }
+
+        public void DeleteCargador(int id)
+        {
+            _cargadorRepository.DeleteCargador(id);
+        }
+
         public List<Cargador> GetAllCargadores()
         {
             return _cargadorRepository.GetAllCargadores();
         }
 
-
-
-        private bool IsHoraPico(DateTime hora)
+        public Cargador GetCargadorById(int id)
         {
-            // Define las horas pico de acuerdo a las restricciones (de 5 am a 9 am y de 4 pm a 8 pm)
-            return (hora.Hour >= 5 && hora.Hour < 9) || (hora.Hour >= 16 && hora.Hour < 20);
+            return _cargadorRepository.GetCargadorById(id);
         }
+
+        public bool IsCargadorInUseDuringPeakHours(Cargador cargador)
+        {
+            DateTime horaActual = DateTime.Now;
+            bool esHorarioPico = (horaActual.Hour >= 5 && horaActual.Hour < 9) || (horaActual.Hour >= 16 && horaActual.Hour < 20);
+
+            return esHorarioPico && cargador.EnUso;
+        }
+
+        public void UpdateCargador(Cargador cargador)
+        {
+            _cargadorRepository.UpdateCargador(cargador);
+        }
+
+        
     }
 }
 

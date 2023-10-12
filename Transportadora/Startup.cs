@@ -21,10 +21,11 @@ namespace Transportadora
 
         public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services)
+ 
+        public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<TransporteContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+        var connectionString = configuration.GetConnectionString("TransporteContext");
+        services.AddDbContext<TransporteContext>(options => options.UseNpgsql(connectionString));
 
             // Agregar servicios necesarios
             services.AddScoped<ICargadorRepository, CargadorRepository>();
