@@ -4,7 +4,7 @@ using Transportadora.Services;
 using Transportadora.Models;
 using System;
 using System.Collections.Generic;
-
+using Transportadora.Interfaces;
 
 namespace Transportadora.Controllers
 {
@@ -14,9 +14,9 @@ namespace Transportadora.Controllers
     {
        
        
-            private readonly CargadorRepository _cargadorRepository;
+            private readonly ICargadorRepository _cargadorRepository;
 
-            public CargadorController(CargadorRepository cargadorRepository)
+            public CargadorController(ICargadorRepository cargadorRepository)
             {
                 _cargadorRepository = cargadorRepository;
             }

@@ -12,8 +12,8 @@ using Transportadora.Data;
 namespace Transportadora.Migrations
 {
     [DbContext(typeof(TransporteContext))]
-    [Migration("20231012072134_Autobuses")]
-    partial class Autobuses
+    [Migration("20231012205859_CreateUsoAutobusTable")]
+    partial class CreateUsoAutobusTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

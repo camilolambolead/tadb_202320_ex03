@@ -29,10 +29,13 @@ namespace Transportadora
                 options.UseNpgsql(connectionString));
 
             // Agregar servicios necesarios
+            
+             services.AddScoped<ICargadorService, CargadorService>();
             services.AddScoped<ICargadorRepository, CargadorRepository>();
             services.AddScoped<IAutobusRepository, AutobusRepository>();
-            services.AddScoped<ICargadorService, CargadorService>();
+            
             services.AddScoped<IAutobusService, AutobusService>();
+           
 
             services.AddControllers();
         }
