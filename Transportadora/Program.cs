@@ -1,8 +1,15 @@
 
+using Transportadora;
+using Transportadora.Interfaces;
+using Transportadora.Repositories;
+using Transportadora.Services;
+
 try
 {
- var builder = WebApplication.CreateBuilder(args);
 
+    
+    var builder = WebApplication.CreateBuilder(args);
+ // calling ConfigureServices method
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -16,8 +23,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.Run();   // Código que puede generar una excepción
+    
+    app.Run();   
 }
 catch (Exception ex)
 {

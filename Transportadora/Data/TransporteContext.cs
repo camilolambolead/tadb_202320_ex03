@@ -90,7 +90,7 @@ namespace Transportadora.Data
                 .IsUnique();
 
             modelBuilder.Entity<UsoAutobus>()
-             .HasOne(uso => uso.Autobus)  // Uso la propiedad "Autobus" de la clase UsoAutobus
+             .HasOne(uso => uso.Autobus) 
              .WithMany(autobus => autobus.Usos)  
              .HasForeignKey(uso => uso.AutobusId);
 
@@ -100,7 +100,7 @@ namespace Transportadora.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // Reemplaza "YourConnectionString" con la cadena de conexión de tu base de datos PostgreSQL
+                
                 string connectionString = "Host=parcial1.carwzg1ifhtm.us-east-1.rds.amazonaws.com;Database=Transportadora;Username=camilojaramillo;Password=1238938402";
                 optionsBuilder.UseNpgsql(connectionString);
             }

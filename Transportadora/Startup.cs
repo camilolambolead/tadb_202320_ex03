@@ -9,6 +9,7 @@ using Transportadora.Data;
 using Transportadora.Repositories;
 using Transportadora.Services;
 using Transportadora.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace Transportadora
 {
@@ -27,15 +28,13 @@ namespace Transportadora
             var connectionString = Configuration.GetConnectionString("TransporteContext");
             services.AddDbContext<TransporteContext>(options =>
                 options.UseNpgsql(connectionString));
-
+         
             // Agregar servicios necesarios
-            
-             services.AddScoped<ICargadorService, CargadorService>();
+            services.AddScoped<ICargadorService, CargadorService>();
             services.AddScoped<ICargadorRepository, CargadorRepository>();
             services.AddScoped<IAutobusRepository, AutobusRepository>();
-            
             services.AddScoped<IAutobusService, AutobusService>();
-           
+                
 
             services.AddControllers();
         }
